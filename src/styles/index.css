@@ -1,0 +1,79 @@
+/* ───────── Fonts ─────────
+   Display: Tan Pearl (public/fonts/tan-pearl.woff). Cormorant Garamond is the fallback while it loads. */
+@font-face { font-family: 'Tan Pearl'; src: url('/fonts/tan-pearl.woff') format('woff'); font-weight: 400; font-style: normal; font-display: swap; }
+
+:root {
+  --yellow: #f5b21a;
+  --yellow-soft: #fff1cc;
+  --ink: #0e0e0e;
+  --ink-2: #2b2b29;
+  --mute: #6d6b64;
+  --line: #e6e2d6;
+  --paper: #f7f5ee;
+  --white: #ffffff;
+
+  --f-display: 'Tan Pearl', 'Cormorant Garamond', Georgia, serif;
+  --f-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --gutter: clamp(20px, 4.4vw, 64px);
+  --max: 1360px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --torn: clamp(28px, 5vw, 70px);
+  --header: 76px;
+
+  /* Fluid display sizes: limited by BOTH width and height so titles never outgrow a short screen */
+  --fs-hero: clamp(38px, min(8vw, 13.5vh), 128px);
+  --fs-page: clamp(32px, min(5.6vw, 10vh), 88px);
+  --fs-sec: clamp(30px, min(4vw, 7.5vh), 60px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--f-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+address { font-style: normal; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+::selection { background: var(--yellow); color: var(--ink); }
+
+.mono { font-family: var(--f-mono); font-weight: 400; letter-spacing: 0.02em; }
+.display { font-family: var(--f-display); font-weight: 400; letter-spacing: 0; line-height: 1.12; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: fixed; left: 12px; top: -60px; z-index: 200; background: var(--ink); color: #fff; padding: 10px 16px; transition: top 0.2s; }
+.skip:focus { top: 12px; }
+
+.container { width: 100%; max-width: calc(var(--max) + var(--gutter) * 2); margin-inline: auto; padding-inline: var(--gutter); }
+.section { padding-block: clamp(72px, 11vw, 160px); position: relative; }
+.section--tight { padding-block: clamp(40px, 6vw, 96px); }
+.section--paper { background: var(--paper); }
+.split { display: grid; gap: clamp(32px, 6vw, 96px); grid-template-columns: 1fr; align-items: start; }
+@media (min-width: 900px) { .split { grid-template-columns: 5fr 7fr; } }
+
+.h2 { font-size: clamp(26px, 3.2vw, 44px); }
+.grid { display: grid; gap: clamp(28px, 3vw, 44px) clamp(20px, 2.4vw, 36px); }
+.grid--3 { grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); }
+.grid--4 { grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); }
+
+.prose { display: grid; gap: 20px; max-width: 62ch; color: var(--ink-2); font-size: 17px; }
+.prose a { text-decoration: underline; text-decoration-color: var(--yellow); text-underline-offset: 4px; text-decoration-thickness: 2px; }
+.fine { margin-top: 28px; color: var(--mute); font-size: 12px; }
+.rowhead { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 40px; flex-wrap: wrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
