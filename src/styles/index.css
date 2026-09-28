@@ -1,6 +1,8 @@
 /* ───────── Fonts ─────────
-   Display: Tan Pearl (public/fonts/tan-pearl.woff). Cormorant Garamond is the fallback while it loads. */
-@font-face { font-family: 'Tan Pearl'; src: url('/fonts/tan-pearl.woff') format('woff'); font-weight: 400; font-style: normal; font-display: swap; }
+   Display: Tan Pearl (src/assets/fonts/tan-pearl.woff — kept under src/, not public/, so Vite's CSS
+   pipeline hashes it and prefixes it with the deployed base path; a public/ url() is never rewritten).
+   Cormorant Garamond is the fallback while it loads. */
+@font-face { font-family: 'Tan Pearl'; src: url('../assets/fonts/tan-pearl.woff') format('woff'); font-weight: 400; font-style: normal; font-display: swap; }
 
 :root {
   --yellow: #f5b21a;

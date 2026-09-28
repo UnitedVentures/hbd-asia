@@ -12,6 +12,7 @@ import { DOORS, JOURNEYS, bySlug } from '../data/tours'
 import { DESTINATIONS, CLASSIC_LOOP, destBySlug } from '../data/destinations'
 import { PILLARS, PROMISES, REVIEWS, SITE } from '../data/site'
 import { useIsDesktop } from '../hooks/hooks'
+import { asset } from '../lib/asset'
 
 /* ───────────────────────── Hero ───────────────────────── */
 function Hero() {
@@ -30,7 +31,7 @@ function Hero() {
       <div className="hero__shade" />
 
       <motion.div className="hero__brand" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.8, ease: EASE }}>
-        <motion.img src="/white-logo.svg" alt="Holidays by Design" style={{ opacity: fade }} />
+        <motion.img src={asset('white-logo.svg')} alt="Holidays by Design" style={{ opacity: fade }} />
       </motion.div>
 
       <motion.div className="container hero__inner" style={{ opacity: fade }}>

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import Icon from './Icon'
+import { asset } from '../lib/asset'
 
 // ── Torn-paper edge (the ripped-photo divider from the Russian hiking reference) ─────────
 function tornPath(seed = 7, w = 1440, h = 70) {
@@ -35,7 +36,7 @@ export function TornEdge({ variant = 'a', flip = false, className = '' }) {
 export function Logo({ light = false }) {
   return (
     <span className={`logo ${light ? 'logo--light' : ''}`}>
-      <img className="logo__sun" src="/favicon.svg" alt="" aria-hidden="true" />
+      <img className="logo__sun" src={asset('favicon.svg')} alt="" aria-hidden="true" />
       <span className="logo__text">
         <span className="logo__name">Holidays by Design</span>
         <span className="logo__tag mono">seek out sri lanka</span>

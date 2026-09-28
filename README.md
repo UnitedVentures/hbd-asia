@@ -15,7 +15,7 @@ npm run map:build    # rebuild src/data/lkMap.js from src/assets/source/lk.svg
 ## Type
 | Role | Font |
 |---|---|
-| Display titles | **Tan Pearl** (`public/fonts/tan-pearl.woff`), Cormorant Garamond as fallback (`--f-display` in `src/styles/index.css`) |
+| Display titles | **Tan Pearl** (`src/assets/fonts/tan-pearl.woff` — kept under `src/`, not `public/`, so Vite hashes and base-prefixes it; see Deploying below), Cormorant Garamond as fallback (`--f-display` in `src/styles/index.css`) |
 | Headings, body, UI | Poppins |
 | Numbers, labels, eyebrows, details, links | IBM Plex Mono |
 
@@ -35,12 +35,19 @@ src/pages/                 Home, Journeys, JourneyDetail, Destinations, Design (
 ## Interactive map
 `IslandMap` renders the real Sri Lanka district geometry (Simplemaps SVG → `src/data/lkMap.js`) with a projection fitted to the file's own lat/lon reference points, so destination `lon/lat` in `destinations.js` land exactly. Features: hover a district for its name, hover a pin for a photo marker, scroll-drawn route with icon badges on stops reached and the current stop's photo. Each destination has a `district` (ISO code, highlighted) and `icon` (key in `components/Icon.jsx`). Colours live in `components.css` (`--land`, `--land-line`, `.imap__*`).
 
+## Deploying (GitHub Pages)
+This is a Vite SPA deployed as a GitHub Pages **project** site, served at `https://<owner>.github.io/hbd-asia/` — not the domain root. That has two consequences, both already handled, but easy to break if you're not aware of them:
+
+1. **Every asset reference must go through `src/lib/asset.js`'s `asset()` helper** (or, in `index.html`, the `%BASE_URL%` placeholder), never a hardcoded `/images/foo.jpg`-style path. A literal leading-slash path always resolves against the *domain* root, not wherever the app is actually served from — that's what caused the 404s / broken preload when this first went live. `npm run dev` stays at `/` (so this is invisible locally); only `npm run build` applies the `/hbd-asia/` prefix (see `vite.config.js`). If the repo is ever renamed or moved to its own domain, set `VITE_BASE_PATH` at build time (e.g. `VITE_BASE_PATH=/ npm run build`) rather than editing paths by hand — and update `pathSegmentsToKeep` in `public/404.html` to match.
+2. **Deep links need a fallback.** GitHub Pages has no server-side router, so a direct visit (or refresh) on e.g. `/hbd-asia/journeys` 404s unless something redirects it back to `index.html`. `public/404.html` + the small script in `index.html`'s `<head>` handle this (the standard [spa-github-pages](https://github.com/rafgraph/spa-github-pages) trick) — don't remove them.
+
+To sanity-check a production build locally before pushing: `npm run build && npm run preview`, then open `http://localhost:4173/hbd-asia/` (not the bare root — Vite preview honours the same base).
+
 ## Enquiry form
 `src/lib/enquiry.js` — set `VITE_ENQUIRY_ENDPOINT` (Formspree, Basin, your own API) to POST JSON. With no endpoint it opens the visitor's email client pre-filled to `info@hbdasia.com`. **Add a real endpoint (+ spam protection) before launch.**
 
 ## Before launch checklist
 - [ ] Real team photo (`team.jpg`); review Unsplash photos with people
-- [ ] Replace the wordmark in `Bits.jsx → Logo` with the official SVG logo
 - [ ] Verify draft copy in `tours.js` / `destinations.js` / `site.js`
 - [ ] Reviews: only one verbatim quote captured — import the rest with permission, or embed TripAdvisor/Google
 - [ ] Privacy / Terms pages (currently placeholders) — GDPR, Australian Privacy Principles, US state laws

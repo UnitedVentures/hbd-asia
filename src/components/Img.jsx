@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
 import { IMAGES } from '../data/images'
+import { asset } from '../lib/asset'
 
 // Renders /images/<file>. If the file isn't there yet, shows a topographic placeholder labelled with the filename
 // so it's obvious which photo to drop in. `parallax` (percent) shifts the photo inside its frame on scroll.
@@ -19,7 +20,7 @@ export default function Img({ k, alt, ratio, parallax = 0, eager = false, classN
       <motion.div className="img__layer" style={layerStyle}>
         {meta && ok ? (
           <img
-            src={`/images/${meta.file}`}
+            src={asset(`images/${meta.file}`)}
             alt={alt ?? meta.alt}
             loading={eager ? 'eager' : 'lazy'}
             decoding="async"

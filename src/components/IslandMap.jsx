@@ -4,6 +4,7 @@ import Icon from './Icon'
 import { LK_MAP } from '../data/lkMap'
 import { DESTINATIONS, destBySlug } from '../data/destinations'
 import { IMAGES } from '../data/images'
+import { asset } from '../lib/asset'
 
 // Real geography: Simplemaps district paths + a projection fitted to the file's own lat/lon reference points.
 const { ax, bx, ay, by } = LK_MAP.fit
@@ -35,7 +36,7 @@ function PhotoMarker({ dest, clipId }) {
       <circle r={R_BIG + 5} className="imap__ring" />
       <circle r={R_BIG} className="imap__disc" />
       <Icon name={dest.icon} x={-15} y={-15} size={30} stroke={1.5} className="imap__icon" />
-      {file && <image href={`/images/${file}`} x={-R_BIG} y={-R_BIG} width={R_BIG * 2} height={R_BIG * 2} preserveAspectRatio="xMidYMid slice" clipPath={`url(#${clipId})`} />}
+      {file && <image href={asset(`images/${file}`)} x={-R_BIG} y={-R_BIG} width={R_BIG * 2} height={R_BIG * 2} preserveAspectRatio="xMidYMid slice" clipPath={`url(#${clipId})`} />}
       <circle r={R_BIG} className="imap__rim" />
     </motion.g>
   )

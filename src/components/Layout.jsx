@@ -5,6 +5,7 @@ import Icon from './Icon'
 import { Logo, Button } from './Bits'
 import { NAV, SITE } from '../data/site'
 import { EASE } from './Motion'
+import { asset } from '../lib/asset'
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -72,7 +73,7 @@ export function Footer() {
     <footer className="footer">
       <div className="container footer__grid">
         <div className="footer__brand">
-          <img className="footer__logo" src="/white-logo.svg" alt="Holidays by Design — seek out Sri Lanka" width="139" height="78" />
+          <img className="footer__logo" src={asset('white-logo.svg')} alt="Holidays by Design — seek out Sri Lanka" width="139" height="78" />
           <p className="footer__pitch">Tailor-made journeys across Sri Lanka — designed on the island, since {SITE.founded}.</p>
           <div className="footer__social">
             <a href={SITE.social.instagram} target="_blank" rel="noreferrer" aria-label="Instagram"><Icon name="instagram" /></a>
