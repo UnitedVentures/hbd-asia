@@ -15,9 +15,15 @@ import './styles/components.css'
 import './styles/pages.css'
 import App from './App.jsx'
 
+// Deployed under a subpath in production (see vite.config.js) — react-router needs to know
+// about it, or every route match fails and the app falls through to the 404 page. BASE_URL is
+// '/hbd-asia/' in prod, '/' in dev; basename must not have a trailing slash (empty is fine, and
+// matches root behaviour exactly, for local dev).
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '')
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <App />
     </BrowserRouter>
   </StrictMode>,
