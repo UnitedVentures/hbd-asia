@@ -2,12 +2,12 @@ export const SITE = {
   name: 'Holidays by Design',
   tagline: 'seek out sri lanka',
   founded: 1995,
-  address: ['209 Walukarama Road', 'Colombo 3', 'Sri Lanka'],
+  address: ['209, 1st Floor', 'Srimath Anagarika Dharmapala Mawatha', 'Colombo 07 (Zip 00700)', 'Sri Lanka'],
   email: 'info@hbdasia.com',
-  // Regional lines from the current site. US/EU have no dedicated number yet — see contact page.
+
   phones: [
-    { region: 'Australia', code: 'AU', tel: '+61 413 627 281' },
-    { region: 'United Kingdom', code: 'UK', tel: '+44 7530 242 228' },
+    // { region: 'Australia', code: 'AU', tel: '+61 413 627 281' },
+    // { region: 'United Kingdom', code: 'UK', tel: '+44 7530 242 228' },
     { region: 'Sri Lanka', code: 'LK', tel: '+94 77 399 2089' },
   ],
   social: {

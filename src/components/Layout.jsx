@@ -10,8 +10,9 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const { pathname } = useLocation()
+  const isHome = pathname === '/'
   // pages that open with a full-bleed dark photo
-  const darkHero = pathname === '/' || /^\/(journeys|destinations)\/[^/]+$/.test(pathname)
+  const darkHero = isHome || /^\/(journeys|destinations)\/[^/]+$/.test(pathname)
   const overHero = darkHero && !scrolled
 
   useEffect(() => {
@@ -71,7 +72,7 @@ export function Footer() {
     <footer className="footer">
       <div className="container footer__grid">
         <div className="footer__brand">
-          <Logo light />
+          <img className="footer__logo" src="/white-logo.svg" alt="Holidays by Design — seek out Sri Lanka" width="139" height="78" />
           <p className="footer__pitch">Tailor-made journeys across Sri Lanka — designed on the island, since {SITE.founded}.</p>
           <div className="footer__social">
             <a href={SITE.social.instagram} target="_blank" rel="noreferrer" aria-label="Instagram"><Icon name="instagram" /></a>

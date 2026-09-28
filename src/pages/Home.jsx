@@ -29,6 +29,10 @@ function Hero() {
       </motion.div>
       <div className="hero__shade" />
 
+      <motion.div className="hero__brand" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.8, ease: EASE }}>
+        <motion.img src="/white-logo.svg" alt="Holidays by Design" style={{ opacity: fade }} />
+      </motion.div>
+
       <motion.div className="container hero__inner" style={{ opacity: fade }}>
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 1 }}>
           <Eyebrow light>Sri Lanka · tailor-made since {SITE.founded}</Eyebrow>

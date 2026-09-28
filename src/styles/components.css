@@ -70,7 +70,7 @@
 
 /* ───────── Header ───────── */
 .header { position: fixed; inset: 0 0 auto 0; z-index: 100; height: var(--header); transition: background 0.4s, box-shadow 0.4s, color 0.4s; }
-.header__in { height: 100%; max-width: calc(var(--max) + var(--gutter) * 2); margin-inline: auto; padding-inline: var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.header__in { position: relative; height: 100%; max-width: calc(var(--max) + var(--gutter) * 2); margin-inline: auto; padding-inline: var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .header--solid { background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(14px); box-shadow: 0 1px 0 var(--line); }
 .header--hero { color: #fff; }
 .header--hero .header__link, .header--hero .logo { text-shadow: 0 1px 18px rgba(0, 0, 0, 0.45); }
@@ -97,6 +97,7 @@
 .footer__grid { display: grid; gap: 44px 32px; grid-template-columns: 1fr; padding-bottom: 64px; }
 @media (min-width: 720px) { .footer__grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1000px) { .footer__grid { grid-template-columns: 1.6fr 1fr 1fr 1.4fr; } }
+.footer__logo { display: block; height: 46px; width: auto; }
 .footer__pitch { margin-top: 22px; max-width: 34ch; color: rgba(255, 255, 255, 0.7); }
 .footer__social { display: flex; gap: 12px; margin-top: 26px; }
 .footer__social a { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 50%; transition: background 0.3s, color 0.3s, border-color 0.3s; }
@@ -121,17 +122,22 @@
 .marquee__dot { width: 12px; height: 12px; border-radius: 50%; background: var(--yellow); flex: none; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
-/* ───────── Tour card ───────── */
-.tcard__link { display: block; }
-.tcard__img { transition: box-shadow 0.4s; }
+/* ───────── Tour card ─────────
+   The card's own height is set by its grid/flex row (stretch); the link fills that height and lays
+   its content out in a column so the blurb — not a fixed number of pixels — absorbs the slack. That
+   keeps the meta/title top-aligned and the divider + route/arrow footer pinned to the same baseline
+   across a row, whatever the description's length. */
+.tcard { height: 100%; }
+.tcard__link { display: flex; flex-direction: column; height: 100%; }
+.tcard__img { transition: box-shadow 0.4s; flex: none; }
 .tcard__link:hover .img img, .tcard__link:hover .img__ph { transform: scale(1.05); }
 .img__ph { transition: transform 1.2s var(--ease); }
-.tcard__meta { display: flex; justify-content: space-between; gap: 12px; margin-top: 16px; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--mute); }
+.tcard__meta { display: flex; justify-content: space-between; gap: 12px; margin-top: 16px; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--mute); flex: none; }
 .tcard__meta span:first-child { color: var(--ink); }
-.tcard__title { margin-top: 8px; font-size: 21px; font-weight: 500; line-height: 1.25; background: linear-gradient(var(--yellow), var(--yellow)) 0 100% / 0 3px no-repeat; width: fit-content; transition: background-size 0.5s var(--ease); padding-bottom: 2px; }
+.tcard__title { margin-top: 8px; font-size: 21px; font-weight: 500; line-height: 1.25; background: linear-gradient(var(--yellow), var(--yellow)) 0 100% / 0 3px no-repeat; width: fit-content; transition: background-size 0.5s var(--ease); padding-bottom: 2px; flex: none; }
 .tcard__link:hover .tcard__title { background-size: 100% 3px; }
-.tcard__blurb { margin-top: 10px; font-size: 14.5px; color: var(--mute); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.tcard__foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); }
+.tcard__blurb { flex: 1 1 auto; margin-top: 10px; font-size: 14.5px; color: var(--mute); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.tcard__foot { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); }
 .tcard__route { font-size: 11.5px; color: var(--ink-2); }
 .tcard__go { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--ink); flex: none; transition: background 0.35s, transform 0.45s var(--ease); }
 .tcard__link:hover .tcard__go { background: var(--yellow); border-color: var(--yellow); transform: rotate(45deg); }

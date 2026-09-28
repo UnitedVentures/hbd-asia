@@ -31,14 +31,11 @@ export function TornEdge({ variant = 'a', flip = false, className = '' }) {
   )
 }
 
-// ── Wordmark: sun-over-globe arc + serif name. Swap for the official SVG logo when available. ─
+// ── Compact mark: official sun-over-globe glyph (public/favicon.svg) + serif name. ─
 export function Logo({ light = false }) {
   return (
     <span className={`logo ${light ? 'logo--light' : ''}`}>
-      <svg className="logo__sun" viewBox="0 0 40 22" aria-hidden="true">
-        <path d="M2 21 A18 18 0 0 1 38 21 Z" fill="var(--yellow)" />
-        <path d="M0 21.5 H40" stroke="var(--yellow)" strokeWidth="1.5" />
-      </svg>
+      <img className="logo__sun" src="/favicon.svg" alt="" aria-hidden="true" />
       <span className="logo__text">
         <span className="logo__name">Holidays by Design</span>
         <span className="logo__tag mono">seek out sri lanka</span>
