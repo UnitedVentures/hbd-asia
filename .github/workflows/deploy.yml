@@ -1,0 +1,54 @@
+name: Deploy to GitHub Pages
+
+# Builds the Vite production bundle (dist/) and publishes THAT — never the raw
+# source — via GitHub's official Pages actions. Runs on every push to main;
+# can also be triggered manually from the Actions tab.
+#
+# One-time setup this workflow needs (in whichever repo actually serves
+# unitedventures.github.io/hbd-asia/ — see README "Deploying" section):
+#   Settings → Pages → Build and deployment → Source → "GitHub Actions"
+# Nothing else to configure; no gh-pages branch, no manual dist/ copying.
+#
+# This file assumes the repo root IS this project (package.json at the repo
+# root) — that's how it's laid out today. If this project is ever nested
+# inside a monorepo instead, add `working-directory:`/path prefixes back in.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
