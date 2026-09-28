@@ -20,6 +20,7 @@ import App from './App.jsx'
 // '/hbd-asia/' in prod, '/' in dev; basename must not have a trailing slash (empty is fine, and
 // matches root behaviour exactly, for local dev).
 const basename = import.meta.env.BASE_URL.replace(/\/$/, '')
+console.log('[debug] BASE_URL =', JSON.stringify(import.meta.env.BASE_URL), 'basename =', JSON.stringify(basename))
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
