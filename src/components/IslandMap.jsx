@@ -130,6 +130,7 @@ export default function IslandMap({ route = [], progress, reached = [], pins = '
             onMouseEnter={() => { setHover(d.slug); onPin?.(d.slug) }}
             onMouseLeave={() => { setHover(null); onLeave?.() }}
             onFocus={() => onPin?.(d.slug)}
+            onClick={() => onPin?.(d.slug)}
             tabIndex={onPin ? 0 : -1}
           >
             {isCur ? (

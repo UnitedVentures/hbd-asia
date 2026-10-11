@@ -27,7 +27,7 @@ export function Destinations() {
 
       <section className="section section--tight">
         <div className="container dmap">
-          <div className="dmap__map"><IslandMap pins="all" showLabels="hubs" active={active} onPin={setActive} onLeave={() => setActive(null)} /></div>
+          <div className="dmap__map"><IslandMap pins="all" showLabels="hubs" active={active} onPin={setActive} /></div>
           <div className="dmap__panel">
             <AnimatePresence mode="wait">
               {d ? (
@@ -40,8 +40,8 @@ export function Destinations() {
                 </motion.div>
               ) : (
                 <motion.div key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="dmap__idle">
-                  <p className="display h2">Hover a pin.</p>
-                  <p>Sri Lanka is compact — most places sit within half a day by road. Pick a region and we’ll link them into a route.</p>
+                  <p className="display h2">Pick a pin.</p>
+                  <p>Hover or tap a pin to see the place. Your choice stays put until you pick another, so you can head straight for “Explore”.</p>
                 </motion.div>
               )}
             </AnimatePresence>
